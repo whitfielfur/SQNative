@@ -1,2 +1,9 @@
 export { NativeDriver } from './driver/native-driver.ts';
+export { table, type Infer } from './schema/table.ts';
+export { integer, text, real, blob, boolean } from './schema/columns.ts';
+export { createTableSql } from './schema/ddl.ts';
+
+export { SelectBuilder } from './query-builder/select.ts';
+export { InsertBuilder } from './query-builder/insert.ts';
+
 export type { DriverOptions, QueryResult } from './common/interfaces.ts';

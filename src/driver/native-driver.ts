@@ -3,6 +3,10 @@ import type { DriverOptions } from '../common/interfaces.ts';
 import { StatementCache } from './statement-cache.ts';
 import { Transaction } from './transaction.ts';
 
+import type { Table } from '../schema/table.ts';
+import { SelectBuilder } from '../query-builder/select.ts';
+import { InsertBuilder } from '../query-builder/insert.ts';
+
 export class NativeDriver {
   private db: DatabaseSync | null = null;
   private cache: StatementCache;
@@ -94,5 +98,13 @@ export class NativeDriver {
       this.transactionDepth--;
       throw error;
     }
+  }
+
+    selectFrom<T extends Table<any>>(table: T): SelectBuilder<T> {
+    return new SelectBuilder(this, table);
+  }
+
+  insertInto<T extends Table<any>>(table: T): InsertBuilder<T> {
+    return new InsertBuilder(this, table);
   }
 }
