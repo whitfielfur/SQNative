@@ -1,6 +1,6 @@
 {
   "name": "sqnative",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "SQLite Query Builder for Node.js",
   "type": "module",
   "main": "./dist/index.js",

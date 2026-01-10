@@ -5,5 +5,7 @@ export { createTableSql } from './schema/ddl.ts';
 
 export { SelectBuilder } from './query-builder/select.ts';
 export { InsertBuilder } from './query-builder/insert.ts';
+export { UpdateBuilder } from './query-builder/update.ts';
+export { DeleteBuilder } from './query-builder/delete.ts';
 
 export type { DriverOptions, QueryResult } from './common/interfaces.ts';

@@ -1,7 +1,7 @@
 # SQNative
 
-> IAB: v0.2.0 (Schema & Query Builder)  
-> Note: This project is currently in early development. This release contains Driver, Schema, and Query Builder layers.
+> IAB: v0.2.2 (Full CRUD & Relations)  
+> Note: This project is currently in early development. This release contains Driver, Schema, and advanced Query Builder (Joins, Aggregations).
 
 SQNative is a zero-dependency toolkit for SQLite in Node.js.
 
@@ -19,7 +19,8 @@ Requires Node.js v22.6.0+. v24 LTS recommended.
 
 Driver Layer: Native bindings, LRU cache, nested transactions.  
 Schema Layer: TypeScript table definitions, DDL generation.  
-Query Builder: Type-safe insertInto, selectFrom, inference.
+Query Builder: Full CRUD (Insert, Select, Update, Delete).  
+Advanced Querying: Inner/Left Joins, Group By, Having.
 
 ## Usage
 
@@ -32,17 +33,24 @@ const Users = table('users', {
   role: text().default('user')
 });
 
+const Posts = table('posts', {
+  id: integer().primaryKey().autoIncrement(),
+  user_id: integer().notNull(),
+  title: text().notNull()
+});
+
 const db = new NativeDriver('./app.db');
 db.connect();
 db.exec(createTableSql(Users));
+db.exec(createTableSql(Posts));
 
-db.insertInto(Users)
-  .values({ name: 'Alice', role: 'admin' })
+db.insertInto(Users).values({ name: 'Micra' }).execute();
+db.update(Users).set({ role: 'admin' }).where('name', '=', 'Micra').execute();
+
+const data = db.selectFrom(Users)
+  .leftJoin(Posts, 'users.id = posts.user_id')
+  .select('users.name', 'posts.title')
   .execute();
-
-const user = db.selectFrom(Users)
-  .where('name', '=', 'Alice')
-  .executeTakeFirst();
 ```
 
 ## Tests
