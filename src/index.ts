@@ -8,4 +8,7 @@ export { InsertBuilder } from './query-builder/insert.ts';
 export { UpdateBuilder } from './query-builder/update.ts';
 export { DeleteBuilder } from './query-builder/delete.ts';
 
+export { Migrator } from './migrator/migrator.ts';
+export type { MigrationFile } from './migrator/types.ts';
+
 export type { DriverOptions, QueryResult } from './common/interfaces.ts';

@@ -21,11 +21,11 @@ describe('Joins', () => {
     db.exec(createTableSql(Users));
     db.exec(createTableSql(Posts));
 
-		db.insertInto(Users).values({ name: 'Micro' }).execute();
+		db.insertInto(Users).values({ name: 'Mikra' }).execute();
 		db.insertInto(Users).values({ name: 'James' }).execute();
 
-		db.insertInto(Posts).values({ user_id: 1, title: 'Micro Post 1' }).execute();
-		db.insertInto(Posts).values({ user_id: 1, title: 'Micro Post 2' }).execute();
+		db.insertInto(Posts).values({ user_id: 1, title: 'Mikra Post 1' }).execute();
+		db.insertInto(Posts).values({ user_id: 1, title: 'Mikra Post 2' }).execute();
 		db.insertInto(Posts).values({ user_id: 2, title: 'James Post' }).execute();
   });
 
@@ -43,8 +43,8 @@ describe('Joins', () => {
     assert.equal(result.length, 3);
     
     const row1 = result[0] as { name: string; title: string };
-    assert.equal(row1.name, 'Micro');
-    assert.equal(row1.title, 'Micro Post 1');
+    assert.equal(row1.name, 'Mikra');
+    assert.equal(row1.title, 'Mikra Post 1');
   });
 
   test('LEFT JOIN: should work correctly', () => {
